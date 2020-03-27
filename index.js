@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const defaultTagName = '<div>';
+const defaultTagName = 'div';
 const defaultTagId = 'app';
 const configWarning = 'HtmlWebpackElementPlugin: Invalid configuration. Using default options.';
 
