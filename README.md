@@ -1,4 +1,4 @@
-# HTML Webpack Root Plugin
+# HTML Webpack Element Plugin
 
 This is a plugin that extends the functionality of the [HTML Webpack Plugin](https://github.com/jantimon/html-webpack-plugin) by adding an element to the generated HTML file that React (or other frameworks) can use to render the app.
 
@@ -6,7 +6,7 @@ This is a plugin that extends the functionality of the [HTML Webpack Plugin](htt
 ## Installation
 Install the plugin with npm:
 ```shell
-$ npm install html-webpack-root-plugin --save-dev
+$ npm install html-webpack-element-plugin --save-dev
 ```
 
 ## Basic Use
@@ -15,18 +15,21 @@ This adds an element (a div with "root" as the id by default) to the HTML file g
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackRootPlugin = require('html-webpack-root-plugin');
+const HtmlWebpackElementPlugin = require('html-webpack-element-plugin');
 const webpackConfig = {
   entry: 'index.js',
   output: {
-    path: 'build',
-    filename: 'bundle.js'
+    path: 'dist',
+    filename: 'bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin(), new HtmlWebpackRootPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new HtmlWebpackRootPlugin()
+  ],
 };
 ```
 
-Should add this to your `build` directory.
+The above should add this to your `dist` directory.
 
 ```html
 <!DOCTYPE html>
@@ -36,13 +39,14 @@ Should add this to your `build` directory.
     <title>Webpack App</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="app"></div>
     <script src="bundle.js"></script>
   </body>
 </html>
 ```
 
-So you can do this:
+So you can do this without adding a template!:
+
 ```javascript
 import React from 'react';
 import { render } from 'react-dom';
@@ -53,36 +57,34 @@ const Hello = () => (
 
 render(
   <Hello />,
-  document.getElementById('root')
+  document.getElementById('app')
 );
 ```
-Without adding a template!
 
 ## Syntax
 
 ```javascript
-new HtmlWebpackRootPlugin()
+new HtmlWebpackElementPlugin()
 ```
 
-Creates a `<div>` with an id of "root."
+Creates a `<div>` with an id of "app."
 
 ```javascript
-new HtmlWebpackRootPlugin(object)
+new HtmlWebpackElementPlugin(object)
 ```
 
 Takes a configuration object with the following values:
 
 - `tagName`: the type of element created. Defaults to `'div'`.
-- `tagId`: the ID given to the created tag. Defaults to `'root'`.
+- `tagId`: the ID given to the created tag. Defaults to `'app'`.
 
 ```javascript
-new HtmlWebpackRootPlugin(string)
+new HtmlWebpackElementPlugin(string)
 ```
 
 If a string is passed it creates a `<div>` with the passed string as the ID.
 
 If anything other than a string or an object is passed it will use the default values and issue a warning in the Webpack build report.
-
 
 ## Examples
 
@@ -93,12 +95,12 @@ Add `<div id="app"></div>` to the created file.
 const webpackConfig = {
   entry: 'index.js',
   output: {
-    path: 'build',
+    path: 'dist',
     filename: 'bundle.js'
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new HtmlWebpackRootPlugin('app')
+    new HtmlWebpackElementPlugin('root')
   ]
 };
 ```
@@ -112,11 +114,11 @@ const webpackConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new HtmlWebpackRootPlugin({ tagName: 'main', tagId: 'application-root' })
+    new HtmlWebpackElementPlugin({ tagName: 'main', tagId: 'application-root' })
   ]
 };
 ```
 
 ## Notes
 
-Plugin based on [html-webpack-react-root-plugin](https://www.npmjs.com/package/html-webpack-react-root-plugin) by @aaronjkrause and updated for Webpack 4.
+Plugin originally based on [html-webpack-root-plugin](https://www.npmjs.com/package/html-webpack-root-plugin) by @octalmage and updated for HTML Webpack Plugin 4.

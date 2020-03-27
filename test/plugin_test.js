@@ -1,11 +1,10 @@
 // TODO: FIX the test compiler.
 const assert = require('assert');
-const Plugin = require('../lib/plugin');
-const constants = require('../lib/constants');
+const Plugin = require('../index.js');
 
-const tagName = constants.DEFAULT_TAG_NAME;
-const tagId = constants.DEFAULT_TAG_ID;
-const configWarn = constants.CONFIG_WARNING;
+const tagName = 'div';
+const tagId = 'app';
+const configWarn = 'HtmlWebpackElementPlugin: Invalid configuration. Using default options.';
 
 describe('Plugin class', () => {
   it('should configure a plugin with passed options object', () => {
