@@ -1,5 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
-const constants = require('./constants'); // eslint-disable-line
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const defaultTagName = '<div>';
 const defaultTagId = 'app';
