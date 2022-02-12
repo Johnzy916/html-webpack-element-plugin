@@ -24,7 +24,7 @@ const webpackConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new HtmlWebpackRootPlugin()
+    new HtmlWebpackElementPlugin()
   ],
 };
 ```
